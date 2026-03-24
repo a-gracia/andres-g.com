@@ -1,32 +1,25 @@
 ---
+import Social from "./Social.astro";
+
 const github = "a-gracia";
 const linkedin = "AndresGraciaDanies";
 const crunchbase = "andres-gracia-danies";
 const instagram = "graciadanies";
 ---
 
+<style>
+  footer {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+</style>
+
 <footer>
   <p>
-    Check out my social media profiles:
-    <ul>
-      <li>
-        <a href={"https://github.com/" + github} target="_blank">Github</a>
-      </li>
-      <li>
-        <a href={"https://linkedin.com/in/" + linkedin} target="_blank"
-          >Linkedin</a
-        >
-      </li>
-      <li>
-        <a href={"https://crunchbase.com/person/" + crunchbase} target="_blank"
-          >Github</a
-        >
-      </li>
-      <li>
-        <a href={"https://instagram.com/" + instagram} target="_blank"
-          >Instagram</a
-        >
-      </li>
-    </ul>
+    <Social platform="github" username="a-gracia" />
+    <Social platform="linkedin" username="AndresGraciaDanies" />
+    <Social platform="crunchbase" username="andres-gracia-danies" />
+    <Social platform="instagram" username="graciadanies" />
   </p>
 </footer>

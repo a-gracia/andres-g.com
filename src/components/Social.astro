@@ -1,0 +1,26 @@
+---
+const { platform, username } = Astro.props;
+
+let url;
+
+if (platform.toLowerCase() === "github") {
+  url = "https://github.com/" + username;
+} else if (platform.toLowerCase() === "instagram") {
+  url = "https://instagram.com/" + username;
+} else if (platform.toLowerCase() === "linkedin") {
+  url = "https://instagram.com/in/" + username;
+} else if (platform.toLowerCase() === "crunchbase") {
+  url = "https://crunchbase.com/person/" + username;
+}
+---
+
+<style>
+  a {
+    padding: 0.5rem 1rem;
+    color: white;
+    background-color: #4c1d95;
+    text-decoration: none;
+  }
+</style>
+
+<a href={url} target="_blank">{platform}</a>
