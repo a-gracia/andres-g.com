@@ -1,7 +1,7 @@
 ---
 title: "Rails API authentication using cookies"
 pubDate: 2026-03-25
-description: "This is a tutorial on how to add cookie authentication to your rails API."
+description: "This is a tutorial on how to add cookie authentication to your rails API to make it easier to connect with your frontend framework such as React."
 author: "Andrés Gracia Danies"
 image:
   url: "/blog/rails-api-cookie-authentication.png"
@@ -11,9 +11,9 @@ tags: ["ruby on rails", "api"]
 
 First, I want to welcome you to my first blog ever. This website is expected to be my personal portfolio and the place where I share learnings and thoughts.
 
-My first post is about adding cookie authentication to your Rails app. This tutorial is more like a proof of concept that you can refine for your projects.
+My first post is about adding cookie authentication to your Rails app. This tutorial will help you if you want to connect your frontend such as React to your Rails backend, especially if you don't want to implement JWT tokens and stick to cookies which are in general easier to manage for most applications. At the end of the tutorial you will find an example of how to use the `fetch` function to login so that you can replicate it and create your own [custom hooks](https://react.dev/learn/reusing-logic-with-custom-hooks).
 
-I chose to use Rails v8 built-in authentication instead of devise. The reason is that devise has so much magic behind and I was having trouble with the redirects it expected, while the Rails built-in authentication gives you every single file in a very minimalistic way that you can modify as you need in an easy way, as you will find in this tutorial. I think most of the steps shown here are useful if you want to use devise instead. Let's begin.
+I chose to use Rails v8 built-in authentication instead of devise. The reason is that devise has so much magic behind and I was having trouble with the redirects it expected, while the Rails built-in authentication gives you every single file in a very minimalistic way that you can modify as you need in an easy way, as you will find in this tutorial. I think most of the steps shown here will be useful if you want to use devise instead but you will need to go on the details in order to make it work. Let's begin.
 
 ## Create a new Rails project
 
@@ -29,7 +29,7 @@ rails new my_api --api
 
 Now let's add the Rails 8 built-in authentication as explained in the official [Rails Guides for Securing Applications](https://guides.rubyonrails.org/security.html#authentication) where you can find more details about it.
 
-Once again, run these commands in your terminal:
+Run these commands in your terminal:
 
 ```bash
 rails generate authentication
@@ -65,6 +65,7 @@ At this point, if you try to run your Rails app, you will encounter an error rel
 Go to the file `app/controllers/application_controller.rb` and add the following lines:
 
 ```diff
+#app/controllers/application_controller.rb
 class ApplicationController < ActionController::API
 +  include AbstractController::Helpers
 +  include ActionController::Cookies
@@ -101,7 +102,7 @@ def create
 end
 ```
 
-For the sake of this tutorial, use the previous code so you can reproduce the tests I perform late.
+For the sake of this tutorial, use the previous code so you can reproduce the tests in the following sections.
 
 You can use AI to help generating the JSON responses, but always check it's giving the right status.
 
@@ -113,7 +114,7 @@ Now, you need to allow requests from other domains or origins. So you will need 
 bundle add rack-cors
 ```
 
-Then, add the domains to be allowed. In my case, I'm developing the frontend using React, so I'm allowing the localhost origin. You should also include the domains expected to serve the frontend in production.
+Then, add the domains to be allowed. In my case, I'm developing the frontend using React, so I'm allowing the `localhost:5173` origin. You should also include the domains expected to serve the frontend in production.
 
 Additionally, you have to include the `credentials: true` option to allow cookies.
 
