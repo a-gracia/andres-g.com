@@ -81,7 +81,7 @@ Now you can run your Rails app.
 
 The Rails 8 built-in authentication automatically generates a lot of redirections which are useful if you have a regular rails app. However, in API you want JSON responses instead, so let's modify that.
 
-I'd recommend to use the search function of your IDE and look for `redirect_to` and then start changing one by one as every match has different messages and statuses (especially statuses are importa). I know it's an annoying task but you'll need to make it once and you're done.
+I'd recommend to use the search function of your IDE and look for `redirect_to` and then start changing one by one as every match has different messages and statuses (especially statuses are important). I know it's an annoying task but you'll need to make it once and you're done.
 
 The changes will happen in three files: `authentication.rb`, `passwords_controller.rb` and `sessions_controller.rb`.
 
@@ -100,6 +100,8 @@ def create
   end
 end
 ```
+
+For the sake of this tutorial, use the previous code so you can reproduce the tests I perform late.
 
 You can use AI to help generating the JSON responses, but always check it's giving the right status.
 
@@ -168,11 +170,10 @@ Now you have to set the route for your new endpoint which in my case I liked `/c
 
 Well, now we are ready to test that everything is working. You are expected to write your own tests for your app, but for this tutorial I will use Postman. Rails already wrote all the tests for sessions and passwords when you ran the `rails generate authentication` command, so you'll have to refactor them to expect JSON responses.
 
-We are going to do the following test:
+We are going to do the following tests:
 
 - Get the CSRF token
 - Log in as a User
-- Log out
 
 Remember that the Rails 8 built-in authentication creates a User model but not the controller, so we are not goint to create a User using a request, but manually in the Rails console.
 
@@ -206,7 +207,7 @@ It will return a JSON response with the token:
 }
 ```
 
-This token will be used in the next step. It will also set a cookie.
+This token will be used in the next step. Also, a cookie will be set in Postman.
 
 ### Logging in
 
@@ -214,7 +215,7 @@ Now that you have the token, make a POST request with the `email_address` and `p
 
 **If you use Postman you can import the following curl requests by clicking File > Import and then paste the code**
 
-Note that if you are using Postman, it will automatically include the cookie in the header.
+Note that if you are using Postman, it will automatically include the cookie in the header so the final result will look a bit different.
 
 ```bash
 curl --location 'http://localhost:3000/session' \
@@ -322,4 +323,4 @@ def create
 end
 ```
 
-And last but not least, if you find any issues, comments, suggestions or anything else, do not hesitate to contact me at graciadanies[at]gmail.com or via social network, I will be happy to improve this tutorial so it can be useful for anyone who wants to enable cookie authentication on their Rails API.
+And last but not least, if you find any issues or have any comments, suggestions or anything else, please do not hesitate to contact me at graciadanies[at]gmail.com or via social network, I will be happy to improve this tutorial so it can be useful for anyone who wants to enable cookie authentication on their Rails API.
