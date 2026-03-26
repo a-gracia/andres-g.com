@@ -175,7 +175,7 @@ We are going to do the following tests:
 - Get the CSRF token
 - Log in as a User
 
-Remember that the Rails 8 built-in authentication creates a User model but not the controller, so we are not goint to create a User using a request, but manually in the Rails console.
+Remember that the Rails 8 built-in authentication creates a User model but not the controller, so we are not going to create a User using a request, but manually in the Rails console.
 
 So let's create a User. Open the Rails console:
 
@@ -249,7 +249,7 @@ And that's it. Now you have a Rails API backend with cookie authentication that 
 
 ### Javascript fetch script
 
-I would also like to include a minimal example of how to do the test on Javascript. You can run these commands on your browser console but remember to be on the page allowed in the `cors.rb` file, otherwise you will get an error like `Connecting to 'http://localhost:3000/csrf-token' violates the following Content Security`, which is the expected behavior.
+I would also like to include a minimal example of how to do the test on Javascript. You can run these commands on your browser console but remember to be on the page allowed in the `cors.rb` file, otherwise you will get an error like `Access to fetch at 'http://localhost:3000/csrf-token' from origin 'http://example.com' has been blocked by CORS policy`, which is the expected behavior.
 
 For the CSRF token endpoint,
 
@@ -303,7 +303,7 @@ Here is the full command:
 rails generate scaffold User name:string email_address:string password:digest --skip-collision-check --skip
 ```
 
-- When a user signs up, you can automatically create a session so the user also logs in. Once you have the User controller, your create method can look like this:
+- When a user signs up, you can automatically create a session so the user also logs in. Once you have the User controller, your `create` method can look like this:
 
 ```ruby
 # user_controller.rb
