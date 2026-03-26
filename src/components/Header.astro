@@ -1,22 +1,37 @@
 ---
-import Menu from "./Menu.astro";
 import Navigation from "./Navigation.astro";
-import ThemeIcon from "./ThemeIcon.astro";
 ---
 
 <header>
+  <img
+    class="profile-picture"
+    src="https://api.dicebear.com/9.x/miniavs/svg?seed=andres"
+    alt="profile picture"
+  />
+  <p><a class="name-title" href="/">ANDRES GRACIA</a></p>
+  <hr />
   <nav>
-    <div>
-      <ThemeIcon />
-      <Menu />
-    </div>
     <Navigation />
   </nav>
 </header>
 
 <style>
-  div {
-    display: flex;
-    justify-content: space-between;
+  .profile-picture {
+    border-radius: 100px;
+    width: 150px;
+    height: 150px;
+  }
+
+  .name-title {
+    color: rgb(0, 13, 129);
+    font-size: 1.8rem;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  hr {
+    width: 50px;
+    border: 4px solid rgb(0, 195, 255);
+    border-radius: 10px;
   }
 </style>
