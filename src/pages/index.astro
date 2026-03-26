@@ -1,8 +1,51 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-const pageTitle = "Home Page";
+import ProjectCard from "../components/ProjectCard.astro";
+import rischioPreview from "../assets/projects/rischio.io.png";
+import Repositories from "../components/Repositories.astro";
+
+const pageTitle = "Web Developer & Scientific Programmer";
+const projects = [
+  {
+    name: "Rischio.io",
+    url: "https://rischio.io",
+    image: rischioPreview,
+    description:
+      "Design and analyze geotechnical engineering structures such as retaining walls,deep foundations and shallow foundations.",
+  },
+];
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <h2>My awesome blog subtitle</h2>
+  <p>
+    I build web apps with <a href="https://rubyonrails.org/" target="_blank"
+      >Ruby on Rails</a
+    >, <a href="https://fastapi.tiangolo.com/" target="_blank">FastAPI</a>, <a
+      href="https://react.dev/"
+      target="_blank">React</a
+    > and <a href="https://astro.build/" target="_blank">Astro</a>.
+  </p>
+
+  <p>
+    I'm also a developer of scientific software using <a
+      href="https://www.python.org/"
+      target="_blank">Python</a
+    > and
+    <a href="https://www.mathworks.com/products/matlab.html" target="_blank"
+      >MATLAB</a
+    >.
+  </p>
+
+  <p>
+    Follow me on <a href="https://github.com/a-gracia" target="_blank">Github</a
+    >!
+  </p>
+
+  <h2>Projects</h2>
+
+  {projects.map((project) => <ProjectCard project={project} />)}
+
+  <h2>Code</h2>
+
+  <h2>Articles</h2>
 </BaseLayout>
