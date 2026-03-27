@@ -18,7 +18,7 @@ body {
 
 h1 {
   margin: 1rem 0;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 /* nav styles */
@@ -46,7 +46,7 @@ header {
 
 .nav-links a {
   text-align: center;
-  padding: 10px 0;
+  padding: 15px 20px;
   text-decoration: none;
   font-size: 1.2rem;
   font-weight: bold;
@@ -83,12 +83,33 @@ header {
   border-radius: 8px;
 }
 
+.header-container,
+.name-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+hr {
+  justify-self: center;
+  width: 50px;
+  border: 4px solid rgb(0, 195, 255);
+  border-radius: 10px;
+}
+
 @media screen and (min-width: 636px) {
   header {
     flex-direction: row;
   }
+
+  .header-container,
+  .name-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+
   .nav-links {
-    margin-left: 5em;
     display: block;
     position: static;
     width: auto;
@@ -97,10 +118,16 @@ header {
 
   .nav-links a {
     display: inline-block;
-    padding: 15px 20px;
   }
 
   .menu {
     display: none;
+  }
+
+  .name-container {
+    padding-left: 20px;
+  }
+  hr {
+    width: 240px;
   }
 }
