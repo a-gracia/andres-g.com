@@ -43,9 +43,13 @@ const projects = [
 
   <h2>Projects</h2>
 
-  {projects.map((project) => <ProjectCard project={project} />)}
+  <div class="card-container">
+    {projects.map((project) => <ProjectCard project={project} />)}
+  </div>
 
   <h2>Code</h2>
-
+  <div class="card-container">
+    <Repositories />
+  </div>
   <h2>Articles</h2>
 </BaseLayout>

@@ -3,20 +3,8 @@ import { Image } from "astro:assets";
 const { project } = Astro.props;
 ---
 
-<div class="project-card">
+<div class="card">
   <Image src={project.image} alt={`${project.name} preview`} width="320" />
   <h3>{project.name}</h3>
   <p>{project.description}</p>
 </div>
-
-<style>
-  .project-card {
-    display: flex;
-    flex-direction: column;
-    width: 336px;
-    gap: 8px;
-    padding: 8px;
-    border: solid rgba(0, 0, 0, 0.25) 1px;
-    border-radius: 8px;
-  }
-</style>

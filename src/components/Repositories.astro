@@ -1,0 +1,44 @@
+---
+import RepoLanguages from "./RepoLanguages.astro";
+
+const githubLogin = "a-gracia";
+const githubRepos = await fetch(
+  "https://api.github.com/users/a-gracia/starred",
+);
+const githubReposData = await githubRepos.json();
+const filteredReposData = githubReposData.filter(
+  (repo) => repo.owner.login === githubLogin,
+);
+---
+
+{
+  filteredReposData.map((repo) => {
+    return (
+      <div class="card">
+        <div class="repo-creator-container">
+          <img class="repo-avatar" src={repo.owner.avatar_url} alt="" />
+          <p>{repo.full_name}</p>
+        </div>
+        <p>{repo.description}</p>
+        <p>
+          <a href={repo.html_url} target="_blank">
+            View Repo
+          </a>
+        </p>
+        <RepoLanguages languages_url={repo.languages_url} />
+      </div>
+    );
+  })
+}
+
+<style>
+  .repo-creator-container {
+    display: flex;
+    gap: 8px;
+  }
+
+  .repo-avatar {
+    width: 20px;
+    border-radius: 100px;
+  }
+</style>

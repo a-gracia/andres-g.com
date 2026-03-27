@@ -63,7 +63,30 @@ header {
   display: unset;
 }
 
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card {
+  width: 336px;
+  min-height: 200px;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: space-between;
+  padding: 8px;
+  border: solid rgba(0, 0, 0, 0.25) 1px;
+  border-radius: 8px;
+}
+
 @media screen and (min-width: 636px) {
+  header {
+    flex-direction: row;
+  }
   .nav-links {
     margin-left: 5em;
     display: block;

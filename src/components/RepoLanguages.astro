@@ -1,0 +1,28 @@
+---
+const { languages_url } = Astro.props;
+
+const languagesFetch = await fetch(languages_url);
+const languagesData = await languagesFetch.json();
+const languages = Object.keys(languagesData).slice(0, 3);
+---
+
+<div class="languages-container">
+  {languages.map((lang) => <div class="language">{lang}</div>)}
+</div>
+
+<style>
+  .languages-container {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .language {
+    font-size: small;
+    font-weight: 700;
+    color: white;
+    background-color: rgb(255, 0, 0);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+</style>
