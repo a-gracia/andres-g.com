@@ -71,7 +71,7 @@ header {
 
 .card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 0.5fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 8px;
 }
 
