@@ -1,11 +1,14 @@
 ---
 import Navigation from "./Navigation.astro";
+
+const userFetch = await fetch("https://api.github.com/users/a-gracia");
+const userData = await userFetch.json();
 ---
 
 <header>
   <img
     class="profile-picture"
-    src="https://api.dicebear.com/9.x/miniavs/svg?seed=andres"
+    src={userData.avatar_url}
     alt="profile picture"
   />
   <div class="header-container">
