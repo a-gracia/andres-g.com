@@ -11,6 +11,12 @@ body {
   line-height: 1.5;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 * {
   box-sizing: border-box;
   margin: 0px;
@@ -18,7 +24,7 @@ body {
 
 h1 {
   margin: 1rem 0;
-  font-size: 2rem;
+  font-size: 1.9rem;
 }
 
 /* nav styles */
@@ -64,13 +70,12 @@ header {
 }
 
 .card-container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 0.5fr));
   gap: 8px;
 }
 
 .card {
-  width: 336px;
   min-height: 200px;
   height: 100%;
 
@@ -88,6 +93,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 4px;
 }
 
 hr {
