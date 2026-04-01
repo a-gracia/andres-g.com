@@ -1,7 +1,11 @@
 ---
 import Navigation from "./Navigation.astro";
-
-const userFetch = await fetch("https://api.github.com/users/a-gracia");
+const token = import.meta.env.GITHUB_TOKEN;
+const fetchOptions = { headers: { Authorization: `Bearer ${token}` } };
+const userFetch = await fetch(
+  "https://api.github.com/users/a-gracia",
+  fetchOptions,
+);
 const userData = await userFetch.json();
 ---
 

@@ -2,8 +2,11 @@
 import RepoLanguages from "./RepoLanguages.astro";
 
 const githubLogin = "a-gracia";
+const token = import.meta.env.GITHUB_TOKEN;
+const fetchOptions = { headers: { Authorization: `Bearer ${token}` } };
 const githubRepos = await fetch(
   "https://api.github.com/users/a-gracia/starred",
+  fetchOptions,
 );
 const githubReposData = await githubRepos.json();
 const filteredReposData = githubReposData

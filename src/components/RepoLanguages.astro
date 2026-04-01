@@ -1,7 +1,8 @@
 ---
 const { languages_url } = Astro.props;
-
-const languagesFetch = await fetch(languages_url);
+const token = import.meta.env.GITHUB_TOKEN;
+const fetchOptions = { headers: { Authorization: `Bearer ${token}` } };
+const languagesFetch = await fetch(languages_url, fetchOptions);
 const languagesData = await languagesFetch.json();
 const languages = Object.keys(languagesData).slice(0, 3);
 ---
