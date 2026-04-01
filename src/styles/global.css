@@ -6,7 +6,7 @@ html {
 body {
   margin: 0 auto;
   width: 100%;
-  max-width: 80ch;
+  max-width: 875px;
   padding: 1rem;
   line-height: 1.5;
 }
@@ -23,7 +23,7 @@ main {
 }
 
 h1 {
-  margin: 1rem 0;
+  margin: 8px 0;
   font-size: 1.9rem;
 }
 
@@ -71,7 +71,7 @@ header {
 
 .card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
   gap: 8px;
 }
 
