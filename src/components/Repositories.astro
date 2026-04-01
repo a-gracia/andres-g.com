@@ -6,9 +6,9 @@ const githubRepos = await fetch(
   "https://api.github.com/users/a-gracia/starred",
 );
 const githubReposData = await githubRepos.json();
-const filteredReposData = githubReposData.filter(
-  (repo) => repo.owner.login === githubLogin,
-);
+const filteredReposData = githubReposData
+  .filter((repo) => repo.owner.login === githubLogin)
+  .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
 ---
 
 {
@@ -24,6 +24,13 @@ const filteredReposData = githubReposData.filter(
           <a href={repo.html_url} target="_blank">
             View Repo
           </a>
+        </p>
+        <p>
+          {repo.homepage ? (
+            <a href={repo.homepage} target="_blank">
+              Deployed Site
+            </a>
+          ) : null}
         </p>
         <RepoLanguages languages_url={repo.languages_url} />
       </div>
