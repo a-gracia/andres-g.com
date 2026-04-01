@@ -12,7 +12,9 @@ const { project } = Astro.props;
   />
   <h3>{project.name}</h3>
   <p>{project.description}</p>
-  <p><a href={project.url} target="_blank">Visit project</a></p>
+  <p>
+    <a class="default-link" href={project.url} target="_blank">Visit project</a>
+  </p>
 </div>
 
 <style>

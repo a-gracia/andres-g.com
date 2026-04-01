@@ -24,13 +24,13 @@ const filteredReposData = githubReposData
         </div>
         <p>{repo.description}</p>
         <p>
-          <a href={repo.html_url} target="_blank">
+          <a class="default-link" href={repo.html_url} target="_blank">
             View Repo
           </a>
         </p>
         <p>
           {repo.homepage ? (
-            <a href={repo.homepage} target="_blank">
+            <a class="default-link" href={repo.homepage} target="_blank">
               Deployed Site
             </a>
           ) : null}
