@@ -1,11 +1,11 @@
 ---
-title: "Running Slackware on my Laptop: Notes and Fixes"
+title: "Slackware Notes and Configurations"
 pubDate: 2026-04-04
-description: "Notes and fixes for running Slackware on a laptop, covering battery charge limits, CPU governor configuration and elogind hooks."
+description: "A collection of notes and configurations for Slackware, including battery limits, CPU scaling and elogind hooks."
 author: "Andrés Gracia Danies"
 image:
   url: "/blog/slackware-tips.png"
-  alt: "Rails logo"
+  alt: "Slackware logo"
 tags: ["linux", "slackware"]
 ---
 
