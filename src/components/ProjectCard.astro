@@ -3,22 +3,71 @@ import { Image } from "astro:assets";
 const { project } = Astro.props;
 ---
 
-<div class="card">
-  <Image
-    class="project-image"
-    src={project.image}
-    alt={`${project.name} preview`}
-    width="320"
-  />
-  <h3>{project.name}</h3>
-  <p>{project.description}</p>
-  <p>
-    <a class="default-link" href={project.url} target="_blank">Visit project</a>
-  </p>
+<div class="card project-card">
+  <div class="project-image-wrapper">
+    <Image
+      class="project-image"
+      src={project.image}
+      alt={`${project.name} preview`}
+      width="800"
+      height="450"
+    />
+  </div>
+  <div class="project-info">
+    <h3>{project.name}</h3>
+    <p>{project.description}</p>
+    <a class="project-link" href={project.url} target="_blank">
+      Visit project →
+    </a>
+  </div>
 </div>
 
 <style>
+  .project-card {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .project-image-wrapper {
+    width: 100%;
+    overflow: hidden;
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+
   .project-image {
-    align-self: center;
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .project-card:hover .project-image {
+    transform: scale(1.02);
+  }
+
+  .project-info {
+    padding: var(--space-lg);
+  }
+
+  .project-info h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+  }
+
+  .project-info p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-md);
+  }
+
+  .project-link {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .project-link:hover {
+    color: var(--accent-hover);
   }
 </style>

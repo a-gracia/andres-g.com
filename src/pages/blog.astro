@@ -7,13 +7,12 @@ const allPosts = await getCollection("blog");
 allPosts.sort((a, b) => {
   return new Date(b.data.pubDate) - new Date(a.data.pubDate);
 });
-
-const pageTitle = "My Blog";
 ---
 
-<BaseLayout pageTitle={pageTitle}>
-  <p>Have a look to my posts.</p>
-  <ul>
+<BaseLayout pageTitle="Blog">
+  <h1>Blog</h1>
+  <p>Have a look at my posts.</p>
+  <ul class="blog-list">
     {
       allPosts.map((post: any) => (
         <BlogPost url={`/posts/${post.id}`} title={post.data.title} />
@@ -21,3 +20,10 @@ const pageTitle = "My Blog";
     }
   </ul>
 </BaseLayout>
+
+<style>
+  .blog-list {
+    padding: 0;
+    margin: 0;
+  }
+</style>

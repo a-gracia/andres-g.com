@@ -1,29 +1,38 @@
 ---
 const { languages_url } = Astro.props;
-const token = import.meta.env.GITHUB_TOKEN;
-const fetchOptions = { headers: { Authorization: `Bearer ${token}` } };
-const languagesFetch = await fetch(languages_url, fetchOptions);
-const languagesData = await languagesFetch.json();
+let languagesData = {};
+try {
+  const res = await fetch(languages_url);
+  if (res.ok) {
+    languagesData = await res.json();
+  }
+} catch {
+  // fetch failed — render without languages
+}
 const languages = Object.keys(languagesData).slice(0, 3);
 ---
 
 <div class="languages-container">
-  {languages.map((lang) => <div class="language">{lang}</div>)}
+  {languages.map((lang) => <span class="language">{lang}</span>)}
 </div>
 
 <style>
   .languages-container {
     display: flex;
-    gap: 4px;
+    gap: 6px;
     flex-wrap: wrap;
   }
 
   .language {
-    font-size: small;
-    font-weight: 700;
-    color: white;
-    background-color: rgb(255, 0, 0);
-    padding: 1px 6px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--text-muted);
+    background: var(--bg-elevated);
+    padding: 2px 8px;
     border-radius: 4px;
+    border: 1px solid var(--border);
   }
 </style>

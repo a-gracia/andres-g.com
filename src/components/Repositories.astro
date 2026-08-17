@@ -2,13 +2,17 @@
 import RepoLanguages from "./RepoLanguages.astro";
 
 const githubLogin = "a-gracia";
-const token = import.meta.env.GITHUB_TOKEN;
-const fetchOptions = { headers: { Authorization: `Bearer ${token}` } };
-const githubRepos = await fetch(
-  "https://api.github.com/users/a-gracia/starred",
-  fetchOptions,
-);
-const githubReposData = await githubRepos.json();
+let githubReposData = [];
+try {
+  const res = await fetch(
+    "https://api.github.com/users/a-gracia/starred",
+  );
+  if (res.ok) {
+    githubReposData = await res.json();
+  }
+} catch {
+  // fetch failed — render empty
+}
 const filteredReposData = githubReposData
   .filter((repo) => repo.owner.login === githubLogin)
   .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
@@ -17,38 +21,80 @@ const filteredReposData = githubReposData
 {
   filteredReposData.map((repo) => {
     return (
-      <div class="card">
-        <div class="repo-creator-container">
-          <img class="repo-avatar" src={repo.owner.avatar_url} alt="" />
-          <p>{repo.full_name}</p>
+      <div class="card repo-card">
+        <div class="repo-header">
+          <span class="repo-name">{repo.full_name}</span>
+          <span class="repo-stars">★ {repo.stargazers_count}</span>
         </div>
-        <p>{repo.description}</p>
-        <p>
-          <a class="default-link" href={repo.html_url} target="_blank">
-            View Repo
+        {repo.description && (
+          <p class="repo-description">{repo.description}</p>
+        )}
+        <div class="repo-footer">
+          <RepoLanguages languages_url={repo.languages_url} />
+          <a class="repo-link" href={repo.html_url} target="_blank">
+            View →
           </a>
-        </p>
-        <p>
-          {repo.homepage ? (
-            <a class="default-link" href={repo.homepage} target="_blank">
-              Deployed Site
-            </a>
-          ) : null}
-        </p>
-        <RepoLanguages languages_url={repo.languages_url} />
+        </div>
       </div>
     );
   })
 }
 
 <style>
-  .repo-creator-container {
-    display: flex;
-    gap: 8px;
+  .repo-card {
+    justify-content: space-between;
   }
 
-  .repo-avatar {
-    width: 20px;
-    border-radius: 100px;
+  .repo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .repo-name {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .repo-stars {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .repo-description {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .repo-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+  }
+
+  .repo-link {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .repo-link:hover {
+    color: var(--accent);
   }
 </style>

@@ -8,19 +8,26 @@ if (platform.toLowerCase() === "github") {
 } else if (platform.toLowerCase() === "instagram") {
   url = "https://instagram.com/" + username;
 } else if (platform.toLowerCase() === "linkedin") {
-  url = "https://instagram.com/in/" + username;
+  url = "https://linkedin.com/in/" + username;
 } else if (platform.toLowerCase() === "crunchbase") {
   url = "https://crunchbase.com/person/" + username;
 }
 ---
 
+<a class="social-link" href={url} target="_blank">{platform}</a>
+
 <style>
-  a {
-    padding: 0.5rem 1rem;
-    color: white;
-    background-color: #4c1d95;
+  .social-link {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
     text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .social-link:hover {
+    color: var(--accent);
   }
 </style>
-
-<a href={url} target="_blank">{platform}</a>

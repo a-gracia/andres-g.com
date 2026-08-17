@@ -4,7 +4,15 @@ import ProjectCard from "../components/ProjectCard.astro";
 import rischioPreview from "../assets/projects/rischio.io.png";
 import Repositories from "../components/Repositories.astro";
 
-const pageTitle = "Full Stack Developer & Scientific Programmer";
+let avatarUrl = "";
+try {
+  const res = await fetch("https://api.github.com/users/a-gracia");
+  if (res.ok) {
+    const data = await res.json();
+    avatarUrl = data.avatar_url;
+  }
+} catch {}
+
 const projects = [
   {
     name: "Rischio.io",
@@ -16,54 +24,82 @@ const projects = [
 ];
 ---
 
-<BaseLayout pageTitle={pageTitle}>
-  <p>Civil Engineer, MSc & MBA.</p>
+<BaseLayout>
+  <!-- Hero -->
+  <section class="hero">
+    {avatarUrl && <img class="hero-avatar" src={avatarUrl} alt="Andrés Gracia" />}
+    <h1>Andrés Gracia</h1>
+    <p class="subtitle">Civil Engineer, MSc & MBA · Ruby on Rails, Python & React Developer · Scientific Programmer</p>
+    <div class="hero-links">
+      <a href="https://github.com/a-gracia" target="_blank" class="tag">GitHub</a>
+      <a href="https://linkedin.com/in/AndresGraciaDanies" target="_blank" class="tag">LinkedIn</a>
+      <a href="/blog/" class="tag">Blog</a>
+    </div>
+  </section>
 
-  <p>
-    I build web apps with <a
-      class="default-link"
-      href="https://rubyonrails.org/"
-      target="_blank">Ruby on Rails</a
-    >, <a
-      class="default-link"
-      href="https://fastapi.tiangolo.com/"
-      target="_blank">FastAPI</a
-    >, <a class="default-link" href="https://react.dev/" target="_blank"
-      >React</a
-    > and <a class="default-link" href="https://astro.build/" target="_blank"
-      >Astro</a
-    >.
-  </p>
+  <!-- Featured Project -->
+  <section class="featured">
+    <h2>Featured Project</h2>
+    <div class="card-container">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
 
-  <p>
-    I also develop scientific software using <a
-      class="default-link"
-      href="https://www.python.org/"
-      target="_blank">Python</a
-    > and
-    <a
-      class="default-link"
-      href="https://www.mathworks.com/products/matlab.html"
-      target="_blank">MATLAB</a
-    >.
-  </p>
-
-  <p>
-    Follow me on <a
-      class="default-link"
-      href="https://github.com/a-gracia"
-      target="_blank">Github</a
-    >!
-  </p>
-
-  <h2>Projects</h2>
-
-  <div class="card-container">
-    {projects.map((project) => <ProjectCard project={project} />)}
-  </div>
-
-  <h2>Code</h2>
-  <div class="card-container">
-    <Repositories />
-  </div>
+  <!-- Repositories -->
+  <section class="repos">
+    <h2>Open Source</h2>
+    <div class="card-container">
+      <Repositories />
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: var(--space-2xl) 0 var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid var(--border);
+    margin-bottom: var(--space-lg);
+    object-fit: cover;
+  }
+
+  .hero h1 {
+    font-family: var(--font-body);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--space-sm);
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: var(--space-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .featured {
+    padding: var(--space-xl) 0;
+  }
+
+  .repos {
+    padding: var(--space-xl) 0;
+  }
+</style>

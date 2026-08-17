@@ -1,24 +1,21 @@
 ---
 import Navigation from "./Navigation.astro";
-const token = import.meta.env.GITHUB_TOKEN;
-const fetchOptions = { headers: { Authorization: `Bearer ${token}` } };
-const userFetch = await fetch(
-  "https://api.github.com/users/a-gracia",
-  fetchOptions,
-);
-const userData = await userFetch.json();
+let userData = {};
+try {
+  const res = await fetch("https://api.github.com/users/a-gracia");
+  if (res.ok) {
+    userData = await res.json();
+  }
+} catch {
+  // fetch failed — render without profile picture
+}
 ---
 
 <header>
-  <img
-    class="profile-picture"
-    src={userData.avatar_url}
-    alt="profile picture"
-  />
-  <div class="header-container">
+  <div class="header-content">
     <div class="name-container">
-      <p><a class="name-title" href="/">ANDRES GRACIA</a></p>
-      <hr />
+      <a class="name-title" href="/">Andrés Gracia</a>
+      <span class="accent-line"></span>
     </div>
     <nav>
       <Navigation />
@@ -27,16 +24,55 @@ const userData = await userFetch.json();
 </header>
 
 <style>
-  .profile-picture {
-    border-radius: 100px;
-    width: 150px;
-    height: 150px;
+  header {
+    border-bottom: none;
+    padding-bottom: var(--space-md);
+  }
+
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    width: 100%;
+  }
+
+  .name-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
   }
 
   .name-title {
-    color: rgb(0, 13, 129);
-    font-size: 1.8rem;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
     text-decoration: none;
-    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  .name-title:hover {
+    color: var(--text-primary);
+  }
+
+  .accent-line {
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  @media (min-width: 641px) {
+    .header-content {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .name-container {
+      align-items: flex-start;
+    }
   }
 </style>

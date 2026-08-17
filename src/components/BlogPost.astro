@@ -2,6 +2,31 @@
 const { url, title } = Astro.props;
 ---
 
-<li>
-  <a href={url}>{title}</a>
+<li class="blog-post-item">
+  <a href={url}>{title} →</a>
 </li>
+
+<style>
+  .blog-post-item {
+    list-style: none;
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .blog-post-item:last-child {
+    border-bottom: none;
+  }
+
+  .blog-post-item a {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .blog-post-item a:hover {
+    color: var(--accent);
+  }
+</style>

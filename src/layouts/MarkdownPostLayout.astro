@@ -7,40 +7,111 @@ const tags = frontmatter.tags;
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
-  <p>{frontmatter.pubDate.toLocaleDateString()}</p>
-  <p><em>{frontmatter.description}</em></p>
-  <p>Written by: {frontmatter.author}</p>
-  <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
+  <article class="post">
+    <header class="post-header">
+      <time>{frontmatter.pubDate.toLocaleDateString()}</time>
+      <p class="post-description">{frontmatter.description}</p>
+      <p class="post-author">Written by: {frontmatter.author}</p>
+    </header>
 
-  <div class="tags">
-    {
-      tags.map((tag) => (
-        <p class="tag">
-          <a href={`/tags/${tag}`}>{tag}</a>
-        </p>
-      ))
-    }
-  </div>
+    {frontmatter.image && (
+      <img class="post-image" src={frontmatter.image.url} alt={frontmatter.image.alt} />
+    )}
 
-  <slot />
+    {tags && tags.length > 0 && (
+      <div class="tags">
+        {tags.map((tag) => (
+          <a class="tag" href={`/tags/${tag}`}>{tag}</a>
+        ))}
+      </div>
+    )}
+
+    <div class="post-content">
+      <slot />
+    </div>
+  </article>
 </BaseLayout>
 
 <style>
-  a {
-    color: #00539f;
+  .post {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .post-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .post-header time {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .post-description {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  .post-author {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  .post-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
   }
 
   .tags {
     display: flex;
     flex-wrap: wrap;
+    gap: var(--space-sm);
   }
 
-  .tag {
-    margin: 0.25em;
-    border: dotted 1px #a1a1a1;
-    border-radius: 0.5em;
-    padding: 0.5em 1em;
-    font-size: 1.15em;
-    background-color: #f8fcfd;
+  .post-content {
+    line-height: 1.8;
+  }
+
+  .post-content :global(a) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .post-content :global(a:hover) {
+    color: var(--accent-hover);
+  }
+
+  .post-content :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: var(--bg-elevated);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  .post-content :global(pre) {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--space-md);
+    overflow-x: auto;
+  }
+
+  .post-content :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
   }
 </style>

@@ -2,20 +2,25 @@
 import Social from "./Social.astro";
 ---
 
+<footer>
+  <div class="footer-links">
+    <Social platform="github" username="a-gracia" />
+    <Social platform="linkedin" username="AndresGraciaDanies" />
+  </div>
+  <p>&copy; 2026 Andrés Gracia</p>
+</footer>
+
 <style>
   footer {
     display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: var(--space-lg);
   }
 </style>
-
-<footer>
-  <p>
-    <Social platform="github" username="a-gracia" />
-    <Social platform="linkedin" username="AndresGraciaDanies" />
-    <!-- <Social platform="crunchbase" username="andres-gracia-danies" /> -->
-  </p>
-  <p>&copy; 2026 Andres Gracia Danies. All rights reserved.</p>
-  <p>Icons by <a href="https://freepik.com">FreePik</a></p>
-</footer>
